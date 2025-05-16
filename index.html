@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <title>PYT-knap</title>
+  <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 50px;
+    }
+
+    #pyt-button {
+      background-color: red;
+      border: none;
+      color: white;
+      font-size: 4em;
+      padding: 40px 80px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      transition: all 0.2s ease;
+    }
+
+    #pyt-button:active {
+      transform: scale(0.95);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+
+    #message {
+      margin-top: 40px;
+      font-size: 1.5em;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Tryk på PYT-knappen</h1>
+  <button id="pyt-button">PYT</button>
+  <div id="message"></div>
+
+  <script>
+    document.getElementById("pyt-button").addEventListener("click", function() {
+      const messages = [
+        "Pyt – og videre!",
+        "Det var ikke vigtigt.",
+        "Lad det fare.",
+        "Lad det nu ligge.",
+        "Det er da lige meget",
+        "Træk vejret – og pyt med det."
+      ];
+      const msg = messages[Math.floor(Math.random() * messages.length)];
+      document.getElementById("message").textContent = msg;
+    });
+  </script>
+
+</body>
+</html>
