@@ -24,4 +24,4 @@ jobs:
           action: "upload"
           app_location: "/" # Dit projekt ligger i roden
           output_location: "" # Ingen build-mappe
-          app_build_command: "" # <-- Dette fortæller: intet build
+          app_build_command: "" # intet build
