@@ -23,7 +23,7 @@ jobs:
         id: deploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_BLACK_DESERT_082D7FC03 }}
+          azure_static_web_apps_api_token: 4006e7851624203ed4c5930c3033d3acc22f94092d849791468ff66cfd74062006-afa22f9d-a338-4e89-aff3-2c0509e310020030108082d7fc03
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "/"              # Hvor dine HTML-filer ligger
