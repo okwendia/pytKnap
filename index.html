@@ -3,44 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <title>PYT-knap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
-      background-color: #f5f5f5;
+    html, body {
+      margin: 0;
+      padding: 0;
       font-family: sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       text-align: center;
-      padding-top: 100px;
     }
 
     h1 {
-      font-size: 3em;
-      margin-bottom: 50px;
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 2rem;
     }
 
     #pyt-button {
       background-color: red;
-      border: none;
       color: white;
-      font-size: 4em;
-      padding: 40px 80px;
+      font-size: clamp(2rem, 6vw, 4rem);
+      padding: 1em 2em;
+      border: none;
       border-radius: 50%;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
       cursor: pointer;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-      transition: all 0.2s ease;
+      transition: transform 0.2s ease;
     }
 
     #pyt-button:active {
       transform: scale(0.95);
-      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
     }
 
     #message {
-      margin-top: 40px;
-      font-size: 1.5em;
+      margin-top: 2rem;
+      font-size: clamp(1rem, 3vw, 1.5rem);
       color: #333;
+      max-width: 80%;
     }
   </style>
 </head>
-<body>
+  <body>
 
   <h1>Tryk på PYT-knappen</h1>
   <button id="pyt-button">PYT</button>
