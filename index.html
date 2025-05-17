@@ -47,6 +47,11 @@
   <div class="message" id="message"></div>
 
   <script>
+    const sounds = [
+      new Audio('pyt01.m4a'),
+      new Audio('pyt01.m4a'),
+      new Audio('pyt01.m4a')
+    ];
     document.getElementById("pyt-button").addEventListener("click", function() {
       const messages = [
         "Pyt – og videre!",
@@ -57,8 +62,14 @@
         "Pyt Pyt Pyt pyt dd",
         "Træk vejret – og pyt med det."
       ];
+      console.log('sound');
       const msg = messages[Math.floor(Math.random() * messages.length)];
       document.getElementById("message").textContent = msg;
+      // Spil en tilfældig lyd
+      const sound = sounds[Math.floor(Math.random() * sounds.length)];
+      sound.currentTime = 0;
+      console.log(sound);
+      sound.play();
     });
   </script>
 
