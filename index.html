@@ -103,7 +103,7 @@
   </style>
 </head>
   <body>
-    <audio id="pytlyd" src="pyt02.m4a" preload="auto"></audio>
+    <audio id="pytlyd" src="pyt02.mp3" preload="auto"></audio>
     <button type="button" id="sigPytbtn" style="display: block;" onclick="sigPyt()">sigPyttte
     </button>
     <div class="content-wrapper">
@@ -124,7 +124,6 @@
 
     const micBtn = document.getElementById("micBtn");
     const input = document.getElementById("thoughtInput");
-    const sound = document.getElementById("pytlyd");
     const sigPytbtn = document.getElementById("sigPytbtn");
     const message = document.getElementById("messageArea");
       //const api ="https://localhost:5001/api/Pyt";
@@ -218,6 +217,8 @@
   });
 
   function sigPyt(){
+    const sound = document.getElementById("pytlyd");
+    
     sound.currentTime = 0;
     sound.play();
 
