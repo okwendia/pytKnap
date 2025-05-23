@@ -1,8 +1,8 @@
 self.addEventListener("install", e => {
     e.waitUntil(
-      caches.open("pyt-cache").then(cache => {
-        return cache.addAll(["./", "./index.html", "./style.css", "./script.js"]);
-      })
+      //  caches.open("pyt-cache").then(cache => {
+      //    return cache.addAll(["./", ]);
+      // })
     );
   });
   
