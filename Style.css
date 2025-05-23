@@ -1,0 +1,142 @@
+
+
+
+
+
+
+#thoughtInput {
+    flex: 1;
+    padding: 12px 15px;
+    font-size: 1.1rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    resize: vertical;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-family: sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+#micBtn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0 16px;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#micBtn.recording {
+    background-color: #e53935;
+}
+
+.message {
+    background-color: #ffffff;
+    border-left: 6px solid #4CAF50;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-size: 1.1rem;
+    color: #333;
+    text-align: center;
+    transition: all 0.3s ease;
+    min-height: 40px;
+}
+
+
+/* nyt layout*/
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: sans-serif;
+    background: #f0f0f0;
+  }
+  
+  .app-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .content-area {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  
+  .input-wrapper {
+    display: flex;
+    gap: 8px;
+  }
+  
+  /* #thoughtInput {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    border: 2px solid #ccc;
+    resize: vertical;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  #micBtn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0 16px;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  #micBtn.recording {
+    background-color: #e53935;
+  }
+   */
+  .message {
+    background-color: #fff;
+    border-left: 6px solid #4CAF50;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-size: 1.1rem;
+    min-height: 40px;
+    text-align: center;
+  }
+  
+  .button-area {
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 200px;
+  }
+  
+  .pytknap {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle at 30% 30%, #d00, #900);
+    border: 10px solid #333;
+    border-radius: 50%;
+    box-shadow: inset 0 0 20px #000, 0 5px 15px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out;
+  }
+  
+  .pytknap:active {
+    transform: scale(0.95);
+  }

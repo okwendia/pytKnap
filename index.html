@@ -6,224 +6,26 @@
   <meta name="theme-color" content="#4CAF50">
   <title>PYT-knap</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-
-     body {
-      background: #f0f0f0;
-      height: 100vh;
-      margin: 10px;
-      font-family: sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-    }
-
-/* pytknappen */
-.pytknap {
-  height: 200px;
-  background: radial-gradient(circle at 30% 30%, #d00, #900);
-  border: 10px solid #333;
-  border-radius: 50%;
-  box-shadow: inset 0 0 20px #000, 0 5px 15px rgba(0,0,0,0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 2.5rem;
-  font-weight: bold;
-  cursor: pointer;
-  user-select: none;
-  transition: transform 0.1s ease-in-out;
-}
-
-.pytknap:active {
-  transform: scale(0.95);
-}
-.content-wrapper {
-  width: 100%;
-  max-width: 500px;
-  margin: 40px auto;
-  padding: 0 16px; /* <- HER: giver luft i højre og venstre */
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 20px;
-}
-
-.input-wrapper {
-  display: flex;
-  align-items: stretch;
-  gap: 8px;
-}
-
-#thoughtInput {
-  flex: 1;
-  padding: 12px 15px;
-  font-size: 1.1rem;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  resize: vertical;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  font-family: sans-serif;
-  transition: border-color 0.3s ease;
-}
-
-#micBtn {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 0 16px;
-  border-radius: 8px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-#micBtn.recording {
-  background-color: #e53935;
-}
-
-.message {
-  background-color: #ffffff;
-  border-left: 6px solid #4CAF50;
-  padding: 15px 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  font-size: 1.1rem;
-  color: #333;
-  text-align: center;
-  transition: all 0.3s ease;
-  min-height: 40px;
-}
-
-  </style>
+  <link rel="stylesheet" type="text/css" href="Style.css">
+  
 </head>
   <body>
     <audio id="pytlyd" src="pyt02.mp3" preload="auto"></audio>
-    <button type="button" id="sigPytbtn" style="display: block;" onclick="sigPyt()">sigPyttte
+    <button type="button" id="sigPytbtn" style="display: none;" onclick="sigPyt()">sigPyttte
     </button>
-    <div class="content-wrapper">
-      <div class="input-wrapper">
-        <textarea id="thoughtInput" rows="4" placeholder="Skriv eller indtal det, du vil give slip på..."></textarea>
-        <button id="micBtn" title="Tal dine tanker" style="font-size: 1.5rem;">🎤</button>
+    <div class="app-wrapper">
+      <div class="content-area">
+        <div class="input-wrapper">
+          <textarea id="thoughtInput" rows="4" placeholder="Skriv eller indtal det, du vil give slip på..."></textarea>
+          <button id="micBtn" title="Tal dine tanker" style="font-size: 1.5rem;">🎤</button>
+        </div>
+        <div class="message" id="messageArea"></div>
+      </div>  
+      <div class="button-area">
+        <div class="pytknap" id="pyt-button" onclick="sigPyt()">PYT</div>
       </div>
-
-      <div class="pytknap" id="pyt-button" onclick="clearThought()">PYT</div>
-      <div class="message" id="messageArea"></div>
     </div>
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("service-worker.js").then(() => {
-        console.log("Service Worker registered");
-      });
-    }
+    <script src="script.js"></script>
 
-    const micBtn = document.getElementById("micBtn");
-    const input = document.getElementById("thoughtInput");
-    const sigPytbtn = document.getElementById("sigPytbtn");
-    const message = document.getElementById("messageArea");
-      //const api ="https://localhost:5001/api/Pyt";
-      const api = "https://bustrackerserver-fcd5hra6drazczce.northeurope-01.azurewebsites.net/api/Pyt"  // Azure backend URL
-    document.addEventListener("touchstart", function () {}, true);
-
-    let recognition;
-
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      recognition = new SpeechRecognition();
-      recognition.lang = 'da-DK'; // Dansk
-      recognition.continuous = false;
-      recognition.interimResults = false;
-
-      recognition.onstart = function() {
-        micBtn.classList.add('recording');
-        micBtn.title = 'Optager… klik igen for at stoppe';
-      };
-
-      recognition.onend = function() {
-        micBtn.classList.remove('recording');
-        micBtn.title = 'Tal dine tanker';
-      };
-
-      recognition.onresult = function(event) {
-        const transcript = event.results[0][0].transcript;
-        input.value = transcript; // Bare indsæt – ikke send
-      };
-
-      recognition.onerror = function(event) {
-        console.error("Talegenkendelse fejl:", event.error);
-      };
-
-      recognition.onerror = function(event) {
-        micBtn.classList.remove('recording');
-        console.error("Talegenkendelse fejl:", event.error);
-      };
-
-      micBtn.addEventListener("click", () => {
-        if (micBtn.classList.contains('recording')) {
-          recognition.stop();
-        } else {
-          recognition.start();
-        }
-      });
-    } 
-    else {
-      micBtn.disabled = true;
-      micBtn.title = "Talegenkendelse understøttes ikke i denne browser.";
-    }
-
-    async function clearThought() {
-      
-      message.style.display = "block";
-      if (!input.value.trim()) {
-        message.textContent = "Pyt med det !"
-        sigPytbtn.click(); // sigPyt();
-        return;
-      }
-
-      message.textContent = "Tænker...";
-
-      const response = await fetch(api, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": "sk-pyt-1234567890abcdef"
-        },
-        body: JSON.stringify({ text: input.value })
-      });
-
-      const data = await response.json();
-      input.value = "";
-
-      message.style.opacity = 0;
-      setTimeout(() => {
-        message.textContent = data.message;
-        message.style.opacity = 1;
-        sigPyt();
-      }, 300);
-
-    }
-  
-    // Enter-genvej til knappen
-  input.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      clearThought();
-    }
-  });
-
-  function sigPyt(){
-    const sound = document.getElementById("pytlyd");
-    
-    sound.currentTime = 0;
-    sound.play();
-
-  }
-  </script>
-
-</body>
+  </body>
 </html>
